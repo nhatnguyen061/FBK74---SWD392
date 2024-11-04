@@ -81,11 +81,18 @@ public class Chitiethoadon_cus extends HttpServlet {
                 deposit = bill.getRegisteredFootballField().getDeposit();
             }
             request.setAttribute("bookerName", bill.getRegisteredFootballField().getName());
-            request.setAttribute("phone", bill.getRegisteredFootballField().getPhoneNumber());
-            
-        }       
-//        List<ProductDetail> listProductDetail = productDetailDAO.getProductDetailByIDBill(idBill);
-//        request.setAttribute("listProductDT", listProductDetail);
+            request.setAttribute("phone", bill.getRegisteredFootballField().getPhoneNumber());           
+        }   
+        if(bill.getRegistFindOpponent()!=null)
+        {
+            request.setAttribute("loaiSan", bill.getRegistFindOpponent().getTypeFootballField());
+            request.setAttribute("startTime", bill.getRegistFindOpponent().getTimeStart());
+            request.setAttribute("endTime", bill.getRegistFindOpponent().getTimeEnd());
+            request.setAttribute("bookerName", bill.getRegistFindOpponent().getName());
+            request.setAttribute("phone", bill.getRegistFindOpponent().getPhone());
+            request.setAttribute("deposit", bill.getRegistFindOpponent().getDeposit());
+            deposit = (int)bill.getRegistFindOpponent().getDeposit();
+        }
         request.setAttribute("bill", bill);    
         request.setAttribute("totalBill", deposit+bill.getTotalPrice());
         request.getRequestDispatcher("chitiethoadon-cus_nhat.jsp").forward(request, response);

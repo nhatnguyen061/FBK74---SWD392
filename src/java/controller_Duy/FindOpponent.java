@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.RegistFindOpponent;
+import model.User;
 
 /**
  *
@@ -37,7 +38,7 @@ public class FindOpponent extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
+        try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
@@ -66,12 +67,21 @@ public class FindOpponent extends HttpServlet {
         RegistFindOpponentDAO pro = new RegistFindOpponentDAO();
         List<RegistFindOpponent> list = new ArrayList<>();
         HttpSession session = request.getSession();
-        list = pro.getAllList();
-        if (session != null) {
-            session.removeAttribute("list");
+        User user = (User) session.getAttribute("account");
+        if (user == null) {
+            list = pro.getAllList();
+                session.removeAttribute("list");
+            session.setAttribute("list", list);
+            request.getRequestDispatcher("pagination_duy").forward(request, response);
         }
-        session.setAttribute("list", list);
-        request.getRequestDispatcher("pagination_duy").forward(request, response);
+        else
+        {
+            list = pro.getListForFindOpponent(user.getIDAccount());
+                session.removeAttribute("list");
+            session.setAttribute("list", list);
+            request.getRequestDispatcher("pagination_duy").forward(request, response);
+        }
+
     }
 
     /**

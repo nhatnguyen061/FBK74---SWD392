@@ -92,7 +92,6 @@ public class RegistFindOpponentServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         HttpSession sesssion = request.getSession();
-        HttpSession sessionRFO = request.getSession();
         RegistFindOpponentDAO RFOdao = new RegistFindOpponentDAO();
         Random rand = new Random();
         int idRFO = rand.nextInt(100) + 1;
@@ -143,13 +142,15 @@ public class RegistFindOpponentServlet extends HttpServlet {
                     // Chuyển đổi giá trị từ kiểu String sang kiểu int
                     int fieldValue = Integer.parseInt(kindofFields);
                     if (u == null) {
-                        response.sendRedirect("index.jsp");
+                        response.sendRedirect("sign-in.jsp");
                     } else {
                         try {
                             RegistFindOpponent rfo = new RegistFindOpponent(idRFO, u, null, name, phone, startTimeConverted, endTimeConverted, date, power, fieldValue, 100000, 1);
                             RFOdao.insert(u.getIDAccount(), name, phone, startTimeConverted, endTimeConverted, date, power, fieldValue);
-                            sessionRFO.getAttribute("idRFO");
-                            response.sendRedirect("history-regist-find-opponent");
+                            idRFO = RFOdao.getRegistFindOpponentWithLastIndex();
+                            sesssion.setAttribute("idRFO", idRFO);
+                            response.sendRedirect("vnpay_pay1.jsp");
+//                            response.sendRedirect("history-regist-find-opponent");
                         } catch (ClassNotFoundException ex) {
                             Logger.getLogger(RegistFindOpponentServlet.class.getName()).log(Level.SEVERE, null, ex);
                         }

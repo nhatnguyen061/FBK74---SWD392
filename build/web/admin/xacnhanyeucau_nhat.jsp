@@ -89,36 +89,20 @@
                                 <a href="quanlysanbong" class="dropdown-item">Quản lý sân bóng</a>
                                 <a href="danhsachsanbong" class="dropdown-item">Cập nhật sân bóng</a>
                                 <a href="danhsachyeucau" class="dropdown-item">Xác nhận yêu cầu</a>
-                                <a href="" class="dropdown-item">Danh sách đối thủ</a>
+                                <a href="approve_opponent" class="dropdown-item">Danh sách đối thủ</a>
                             </div>
                         </div>
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Giải đấu</a>
                             <div class="dropdown-menu bg-transparent border-0">
-                                <a href="quanlygiaidau_nam.html" class="dropdown-item">Quản lý giải đấu</a>
-                                <a href="quanlydoibongthamgia_nam.html" class="dropdown-item">Quản lý đội bóng và danh sách cầu thủ</a>
-                                <a href="quanlylichthidau_nam.html" class="dropdown-item">Quản lý lịch thi đấu</a>
-                                <a href="quanlyketqua_nam.html" class="dropdown-item">Quản lý kết quả</a>
-                                <a href="kiemduyetcacdoibongthamgiagiaidau_nam.html" class="dropdown-item">Kiểm duyệt các đội bóng tham gia</a>
+                                <a href="frontend.nam/AdminTournaments" class="dropdown-item">Quản lý giải đấu</a>
                             </div>
-                        </div>
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Khóa học</a>
-                            <div class="dropdown-menu bg-transparent border-0">
-                                <a href="" class="dropdown-item">Buttons</a>
-                                <a href="" class="dropdown-item">Typography</a>
-                                <a href="" class="dropdown-item">Other Elements</a>
-                            </div>
-                        </div>
-
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Pages</a>
-                            <div class="dropdown-menu bg-transparent border-0">
-                                <a href="signin.html" class="dropdown-item">Sign In</a>
-                                <a href="signup.html" class="dropdown-item">Sign Up</a>
-                                <a href="404.html" class="dropdown-item">404 Error</a>
-                                <a href="blank.html" class="dropdown-item">Blank Page</a>
-                            </div>
+                        </div>                        
+                        <div class="nav-item">
+                            <a href="manageuser?action=viewList" class="nav-link " ><i class="fa fa-laptop me-2"></i>Quản lý người dùng</a>
+                        </div>                      
+                        <div class="nav-item">
+                            <a href="doanhthu" class="nav-link" ><i class="fa fa-laptop me-2"></i>Doanh thu</a>                            
                         </div>
                     </div>
                 </nav>

@@ -219,26 +219,7 @@
                                 <input type="text" class="form-control" id="nameStaff" value="${bill.account2.name}" name="nameStaff" readonly="">
 
                             </div>
-
-                            <div id="waterContainer" class="mb-1
-                                 ">
-                                <c:forEach var="productDT" items="${listProductDT}">
-                                    <div class="row mb-1">                                       
-                                        <div class="col">
-                                            <label class="form-label" for="typewater">Loại nước</label>
-                                            <input readonly="" type="text" class="form-control" name="typewater" value="${productDT.getProductName(productDT.iDProduct)}">
-                                        </div>
-                                        <div class="col">
-                                            <label class="form-label" for="quantity">Số lượng</label>
-                                            <input readonly="" type="number" class="form-control" name="quantity" value="${productDT.quantity}">
-                                        </div>
-                                        <div class="col">
-                                            <label class="form-label" for="pricewater">Giá tiền</label>
-                                            <input readonly="" type="text" class="form-control" name="pricewater" value="${productDT.price}">
-                                        </div>
-                                    </div>
-                                </c:forEach>
-                            </div>
+                            
 
                             <div class="text-center">
                                 <div class="mb-1" id="totalPrice" >Tổng hóa đơn: ${totalBill} VNĐ</div> 

@@ -22,14 +22,15 @@ public class ScheduleDAO extends DBContext {
     public List<Schedule> getAll(int id) {
         List<Schedule> list = new ArrayList<>();
         String sql = "SELECT [IDScheduleTournament]\n"
-                + "      ,f.Name\n"
-                + "      ,[Date]\n"
-                + "      ,t.TeamName\n"
-                + "      ,ta.TeamName\n"
-                + "      ,[Result]\n"
-                + "      ,s.[Description]\n"
-                + "  FROM [dbo].[ScheduleTournament] s join FootballField f on s.IDFootballFieldSchedule = f.IDFootballField \n"
-                + "  join Team t on s.IDTeam1 = t.IDTeam join Team ta on s.IDTeam2 = ta.IDTeam where s.TournamentID = ?";
+                + "                ,f.Name,\n"
+                + "                 [Date],\n"
+                + "                t.TeamName,\n"
+                + "                ta.TeamName,\n"
+                + "                [Result]\n"
+                + "                ,s.[Description]\n"
+                + "                FROM [dbo].[ScheduleTournament] s join FootballFieldSchedule ffs on s.IDFootballFieldSchedule = ffs.IDFootballFieldSchedule\n"
+                + "				join FootballField f on ffs.IDFootballField = f.IDFootballField\n"
+                + "                join Team t on s.IDTeam1 = t.IDTeam join Team ta on s.IDTeam2 = ta.IDTeam where s.IDTournament = ?";
         try {
             PreparedStatement st = getConnection().prepareStatement(sql);
             st.setInt(1, id);
@@ -53,7 +54,7 @@ public class ScheduleDAO extends DBContext {
 
     public void insertSchedule(Schedule s, int idTournament) {
         String sql = "INSERT INTO [dbo].[ScheduleTournament]\n"
-                + "           ([TournamentID]\n"
+                + "           ([IDTournament]\n"
                 + "           ,[IDFootballFieldSchedule]\n"
                 + "           ,[Date]\n"
                 + "           ,[IDTeam1]\n"
@@ -120,7 +121,7 @@ public class ScheduleDAO extends DBContext {
                 "      ,[IDTeam1]\n" +
                 "      ,[IDTeam2]\n" +
                 "      ,[Result]\n" +
-                "      ,[TournamentID]\n" +
+                "      ,[IDTournament]\n" +
                 "      ,[Description]\n" +
                 "  FROM [dbo].[ScheduleTournament] WHERE [IDScheduleTournament] = ? \n";
         try {

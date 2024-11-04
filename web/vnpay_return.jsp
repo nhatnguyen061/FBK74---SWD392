@@ -1,3 +1,5 @@
+<%@page import="model.RegistFindOpponent"%>
+<%@page import="dao.RegistFindOpponentDAO"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.text.ParseException"%>
 <%@page import="java.text.SimpleDateFormat"%>
@@ -95,8 +97,18 @@
                     <label>
                         <%
                             RegisteredFootballFieldDAO rFFD = new RegisteredFootballFieldDAO();
-                            int rffID;
-                            rffID = (int) session.getAttribute("rffID");
+                            RegistFindOpponentDAO rFOD = new RegistFindOpponentDAO();
+
+                            int rffID = -1;
+                            int rfoID = -1;
+                            if (session.getAttribute("rffID") != null) {
+
+                                rffID = (int) session.getAttribute("rffID");
+                            } else {
+
+                                rfoID = (int) session.getAttribute("idRFO");
+                            }
+
                             BillDAO billD = new BillDAO();
                             Random rand = new Random();
                             if (signValue.equals(vnp_SecureHash)) {
@@ -116,29 +128,51 @@
                                         //    Bill bill = new Bill(request.getParameter("vnp_TxnRef"), rFFD.getRegisteredFootballFielByID(rffID), null, null, null, null, formattedDate);
                                         Bill bill = new Bill();
                                         bill.setInvoice(request.getParameter("vnp_TxnRef"));
-                                        bill.setRegisteredFootballField(rFFD.getRegisteredFootballFielByID(rffID));
-                                        bill.setPaymentDate(formattedDate);
-                                        billD.insertBillWithRegisteredFootballField(bill);
-                                        session.removeAttribute("rffID");
+                                        if (session.getAttribute("rffID") != null) {
+                                            RegisteredFootballField RFF = rFFD.getRegisteredFootballFielByID(rffID);
+                                            bill.setRegisteredFootballField(RFF);
+                                            bill.setPaymentDate(formattedDate);
+                                            bill.setPaymentDate(formattedDate);
+                                            billD.insertBillWithRegisteredFootballField(bill);
+                                            session.removeAttribute("rffID");
+                                        } else {
+                                            RegistFindOpponent RFO = rFOD.getRegistFindOpponentByID(rfoID);
+                                            bill.setRegistFindOpponent(RFO);
+                                            bill.setPaymentDate(formattedDate);
+                                            bill.setPaymentDate(formattedDate);
+                                            billD.insertBillWithRegistFindOpponent(bill);
+                                            session.removeAttribute("idRFO");
+                                        }
+
                                     } catch (ParseException e) {
                                         e.printStackTrace();
                                     }
                                 } else {
                                     rFFD.deleteByIDRegisteredFootballField(rffID);
                                     session.removeAttribute("rffID");
+                                    rFOD.delete(rfoID);
+                                    session.removeAttribute("idRFO");
                                     out.print("Không thành công");
-
                                 }
                             } else {
                                 rFFD.deleteByIDRegisteredFootballField(rffID);
                                 session.removeAttribute("rffID");
+                                rFOD.delete(rfoID);
+                                session.removeAttribute("idRFO");
                                 out.print("invalid signature");
 
                             }
 
                         %></label>                   
                 </div> 
+                <%                    if (rffID != -1) { %>
                 <a href="sandadat" class="btn btn-secondary">Tiếp tục</a>
+                <% } else { %>
+                <a href="history-regist-find-opponent" class="btn btn-secondary">Tiếp tục</a>
+                <% }
+                %>
+
+
             </div>
             <p>
                 &nbsp;

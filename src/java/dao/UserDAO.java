@@ -217,7 +217,7 @@ public class UserDAO extends DBContext {
                 + "      ,[Bank]\n"
                 + "      ,[BankNumber]\n"
                 + "      ,[Role]\n"
-                + "  FROM [FBK74].[dbo].[Account] where IDEmail = ?";
+                + "  FROM [dbo].[Account] where IDEmail = ?";
         try {
             PreparedStatement st = getConnection().prepareStatement(sql);
             st.setString(1, email);

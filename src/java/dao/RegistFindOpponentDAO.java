@@ -101,6 +101,37 @@ public class RegistFindOpponentDAO extends DBContext {
         }
         return list;
     }
+    
+        public List<RegistFindOpponent> getListForFindOpponent(int idAcc) {
+        List<RegistFindOpponent> list = new ArrayList<>();
+        UserDAO ud = new UserDAO();
+
+        String query = "select * from RegistFindOpponent where status = 2 and IDAccount1!=? \n"
+                + "order by date,TimeStart DESC";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, idAcc);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new RegistFindOpponent(
+                        rs.getInt(1),
+                        ud.getUserByIDAccount(rs.getInt(2)),
+                        ud.getUserByIDAccount(rs.getInt(3)),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getTime(6),
+                        rs.getTime(7),
+                        rs.getString(8),
+                        rs.getString(9),
+                        rs.getInt(10),
+                        rs.getDouble(11),
+                        rs.getInt(12)));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
 
     public List<RegistFindOpponent> getAllListForApprove() {
         List<RegistFindOpponent> list = new ArrayList<>();
@@ -194,7 +225,7 @@ public class RegistFindOpponentDAO extends DBContext {
 
     public void insert(int idAccount1, String name, String phone, Time timeStart, Time timeEnd, String date, String power, int typeFootballField) throws ClassNotFoundException {
         String query = "insert into RegistFindOpponent\n"
-                + "  values (?,null,?,?,?,?,?,?,?,'100.000',1)";
+                + "  values (?,null,?,?,?,?,?,?,?,'100000',1)";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(query);
@@ -269,6 +300,25 @@ public class RegistFindOpponentDAO extends DBContext {
             ps.executeUpdate();
         } catch (SQLException e) {
         }
+    }
+    public int getRegistFindOpponentWithLastIndex()
+    {
+        int id = -1;
+        String sql = "SELECT TOP 1 IDRegistFindOppoent\n"
+                + "FROM [dbo].[RegistFindOpponent]\n"
+                + "ORDER BY IDRegistFindOppoent DESC;";
+        try {
+            PreparedStatement st = getConnection().prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                id = rs.getInt("IDRegistFindOppoent");
+                return id;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return id;
+        
     }
 
     public void deleteRegistFindOpponent(int idRFO) throws ClassNotFoundException {

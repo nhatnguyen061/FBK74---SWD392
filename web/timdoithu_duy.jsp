@@ -64,19 +64,20 @@
         <!-- Navbar & Carousel Start -->
 
         <nav class="navbar navbar-expand-lg px-5 py-3 py-lg-0 bg-dark navbar-dark position-sticky">
-            <a href="index.jsp" class="navbar-brand">
-                <h1 class="m-0">FBK74</h1>
+            <a href="index.jsp" class="navbar-brand p-0">
+                <h1 class="m-0"><i class="fa fa-user-tie me-2"></i>FBK74</h1>
             </a>
-
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="fa fa-bars"></span>
+            </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav ms-auto py-0">
-                    <a href="index.jsp" class="nav-item nav-link ">Trang Chủ</a>
-                    <a href="danhsachtimsan" class="nav-item nav-link active">Tìm Sân</a>
-
+                    <a href="index.jsp" class="nav-item nav-link">Trang Chủ</a>
+                    <a href="danhsachtimsan" class="nav-item nav-link">Tìm Sân</a>
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Tìm Đối Thủ</a>
+                        <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown">Tìm Đối Thủ</a>
                         <div class="dropdown-menu m-0">
-                            <a href="regist-find-opponent" class="dropdown-item">Đăng ký làm đối thủ</a>
+                            <a href="regist-find-opponent?IDAccount=${sessionScope.account.IDAccount}" class="dropdown-item">Đăng ký làm đối thủ</a>
                             <a href="find-opponent" class="dropdown-item">Tìm kiếm đối thủ</a>
                         </div>
                     </div>
@@ -87,17 +88,16 @@
                             <a href="HistoryServlet" class="dropdown-item">Giải đấu đã đăng ký</a>
                         </div>
                     </div>
-                    <a href="service.html" class="nav-item nav-link">Khóa Học Bóng Đá</a>
                     <a href="contact.html" class="nav-item nav-link">Liên Hệ</a>
                 </div >
                 <a href="lichsuhoadon" class="icon-button">
                     <span class="material-icons">history</span>
                 </a>
-                <!--login-->
+
                 <h1 class="m-4 ">
                     <div class="d-none d-lg-block ">
                         <c:if test="${sessionScope.account==null}">
-                            <a href="sign-in.jsp" class="bi-person custom-icon me-3">Login!</a>
+                            <a href="login" class="bi-person custom-icon me-3">Login!</a>
                         </c:if>  
                         <c:if test="${sessionScope.account!=null }">
                             <div class="dropdown">
@@ -106,7 +106,7 @@
                                     ${sessionScope.account.name}
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                    <a class="dropdown-item " href="#">Profile</a>
+                                    <a class="dropdown-item " href="profile1">Profile</a>
                                     <a class="dropdown-item " href="#">Update</a>
                                     <a class="dropdown-item " href="logout">Logout</a>
                                 </div>
@@ -114,7 +114,6 @@
                         </c:if> 
                     </div>
                 </h1>
-                <!--end login-->
             </div>
         </nav>   
         <!-- Navbar & Carousel End -->
@@ -366,30 +365,19 @@
         </div>
         <!-- Footer End -->
 
-        <script>
-            $(document).ready(function () {
-                // Kích hoạt Datepicker với định dạng dd/MM/yyyy
-                $("#ngay").datepicker({
-                    dateFormat: "dd/mm/yy",
-                    changeMonth: true,
-                    changeYear: true
-                });
-            });
-        </script>
+
         <!-- Back to Top -->
         <a href="timsan_nhat.jsp" class="btn btn-lg btn-primary btn-lg-square rounded back-to-top"><i class="bi bi-arrow-up"></i></a>
 
 
         <!-- JavaScript Libraries -->
-        <!--<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>-->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
         <script src="lib/wow/wow.min.js"></script>
         <script src="lib/easing/easing.min.js"></script>
         <script src="lib/waypoints/waypoints.min.js"></script>
         <script src="lib/counterup/counterup.min.js"></script>
         <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
         <!-- Template Javascript -->
         <script src="js/main.js"></script>

@@ -171,37 +171,39 @@
                             </div>
                             <div class="card-body">
                                 <a href="AdminAddResult?IDTournament=${IDTournament}" class="btn btn-success mb-3">
-                                    <i class="fas fa-plus"></i> Thêm lịch giải
+                                    <i class="fas fa-plus"></i> Thêm Kết Quả
                                 </a>
 
                                 <div class="table-responsive">
                                     <table class="table table-hover">
                                         <thead class="thead-dark">
                                             <tr>
+                                                <th scope="col">STT</th>
                                                 <th scope="col">Ngày Thi Đấu</th>
-                                                <th scope="col">Thời gian</th>
                                                 <th scope="col">Đội A</th>
                                                 <th scope="col">Đội B</th>
-                                                <th scope="col">Kết quả</th>
-                                                <th scope="col">Mô tả</th>
+                                                <th scope="col">Tỷ Số</th>
+                                                <th scope="col">Lượt Trận</th>
                                                 <th scope="col">Chức Năng</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                        
-                                            <c:forEach var="sT" items="${listST}">
+                                            <c:forEach items="${scheduleResults}" var="item" varStatus="stt">
                                                 <tr>
-
-                                                    <td>${sT.date}</td>
-                                                    <td>${sT.footballFieldSchedule.startTime} - ${sT.footballFieldSchedule.endTime}</td>
-                                                    <td>Đội ${sT.teamA.name}</td>
-                                                    <td>Đội ${sT.teamB.name}</td>
-                                                    <td>${sT.result}</td>
-                                                    <td>${sT.description}</td>
+                                                    <td>${stt.index + 1}</td>
+                                                    <fmt:parseDate value="${item.date}" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both" />
+                                                    <td><fmt:formatDate pattern="dd.MM.yyyy HH:mm" value="${parsedDateTime}" /> </td>
+                                                    <td>${item.teamA}</td>
+                                                    <td>${item.teamB}</td>
+                                                    <td>${item.result}</td>
+                                                    <td>${item.detail}</td>
                                                     <td>
-                                                        <!-- Các chức năng, ví dụ: nút xem chi tiết, nút chỉnh sửa, nút xóa -->
-                                                        <button class="btn btn-warning">Sửa</button>
-                                                        <button class="btn btn-danger">Xóa</button>
+                                                        <a href="AdminEditResult?IDTournament=${IDTournament}&scheduleID=${item.id}" class="btn btn-primary btn-sm">
+                                                            <i class="fas fa-edit"></i> Chỉnh Sửa
+                                                        </a>
+                                                        <a href="AdminDeleteResult?IDTournament=${IDTournament}&scheduleID=${item.id}" class="btn btn-danger btn-sm">
+                                                            <i class="fas fa-trash-alt"></i> Xóa
+                                                        </a>
                                                     </td>
                                                 </tr>
                                             </c:forEach>

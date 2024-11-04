@@ -38,6 +38,23 @@ public class BillDAO extends DBContext {
             System.out.println(e);
         }
     }
+    
+    public void insertBillWithRegistFindOpponent(Bill bill) {
+        String sql = "INSERT INTO [dbo].[Bill]\n"
+                + "           ([Invoice]\n"
+                + "           ,[IDRegistFindOppoent] ,[PaymentDate])"
+                + "     VALUES"
+                + "           (?,?,?)";
+        try {
+            PreparedStatement st = getConnection().prepareStatement(sql);
+            st.setString(1, bill.getInvoice());
+            st.setInt(2, bill.getRegistFindOpponent().getIdRFO());
+            st.setString(3, bill.getPaymentDate());
+            st.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
 
     public void insertBillWithScheduleTournament(Bill bill) {
         String sql = "INSERT INTO [dbo].[Bill]\n"
@@ -109,6 +126,7 @@ public class BillDAO extends DBContext {
         List<Bill> list = new ArrayList<>();
         RegisteredFootballFieldDAO rFFD = new RegisteredFootballFieldDAO();
         RegistFindOpponentDAO rFOD = new RegistFindOpponentDAO();
+        ScheduleTournamentDAO sTD = new ScheduleTournamentDAO();
         UserDAO userD = new UserDAO();
         String sql = "SELECT [IDBill]\n"
                 + "      ,[Invoice]\n"
@@ -133,7 +151,7 @@ public class BillDAO extends DBContext {
                 String PaymentDate = rs.getString("PaymentDate");
                 int totalPrice = rs.getInt("TotalPrice");
                 Bill bill = new Bill(IDBill, Invoice, rFFD.getRegisteredFootballFielByID(IDRegisteredFootballField),
-                        rFOD.getRegistFindOpponentByID(IDRegistFindOppoent), userD.getUserByIDAccount(IDAccount2), null, PaymentDate, totalPrice);
+                        rFOD.getRegistFindOpponentByID(IDRegistFindOppoent), userD.getUserByIDAccount(IDAccount2), sTD.getScheduleTournamentByID(IDScheduleTournament), PaymentDate, totalPrice);
                 list.add(bill);
             }
         } catch (SQLException ex) {
@@ -146,6 +164,7 @@ public class BillDAO extends DBContext {
         List<Bill> list = new ArrayList<>();
         RegisteredFootballFieldDAO rFFD = new RegisteredFootballFieldDAO();
         RegistFindOpponentDAO rFOD = new RegistFindOpponentDAO();
+        ScheduleTournamentDAO sTD = new ScheduleTournamentDAO();
         UserDAO userD = new UserDAO();
         String sql = "SELECT [IDBill]\n"
                 + "      ,[Invoice]\n"
@@ -170,7 +189,7 @@ public class BillDAO extends DBContext {
                 String PaymentDate = rs.getString("PaymentDate");
                 int totalPrice = rs.getInt("TotalPrice");
                 Bill bill = new Bill(IDBill, Invoice, rFFD.getRegisteredFootballFielByID(IDRegisteredFootballField),
-                        rFOD.getRegistFindOpponentByID(IDRegistFindOppoent), userD.getUserByIDAccount(IDAccount2), null, PaymentDate, totalPrice);
+                        rFOD.getRegistFindOpponentByID(IDRegistFindOppoent), userD.getUserByIDAccount(IDAccount2), sTD.getScheduleTournamentByID(IDScheduleTournament), PaymentDate, totalPrice);
                 list.add(bill);
             }
         } catch (SQLException ex) {
@@ -183,6 +202,7 @@ public class BillDAO extends DBContext {
         List<Bill> list = new ArrayList<>();
         RegisteredFootballFieldDAO rFFD = new RegisteredFootballFieldDAO();
         RegistFindOpponentDAO rFOD = new RegistFindOpponentDAO();
+        ScheduleTournamentDAO sTD = new ScheduleTournamentDAO();
         UserDAO userD = new UserDAO();
         String sql = "SELECT [b].[IDBill]\n"
                 + "      ,[b].[Invoice]\n"
@@ -213,7 +233,7 @@ public class BillDAO extends DBContext {
                 String PaymentDate = rs.getString("PaymentDate");
                 int totalPrice = rs.getInt("TotalPrice");
                 Bill bill = new Bill(IDBill, Invoice, rFFD.getRegisteredFootballFielByID(IDRegisteredFootballField),
-                        rFOD.getRegistFindOpponentByID(IDRegistFindOppoent), userD.getUserByIDAccount(IDAccount2), null, PaymentDate, totalPrice);
+                        rFOD.getRegistFindOpponentByID(IDRegistFindOppoent), userD.getUserByIDAccount(IDAccount2), sTD.getScheduleTournamentByID(IDScheduleTournament), PaymentDate, totalPrice);
                 list.add(bill);
             }
         } catch (SQLException ex) {
@@ -226,6 +246,7 @@ public class BillDAO extends DBContext {
         List<Bill> list = new ArrayList<>();
         RegisteredFootballFieldDAO rFFD = new RegisteredFootballFieldDAO();
         RegistFindOpponentDAO rFOD = new RegistFindOpponentDAO();
+        ScheduleTournamentDAO sTD = new ScheduleTournamentDAO();
         UserDAO userD = new UserDAO();
         String sql = "SELECT [b].[IDBill]\n"
                 + "      ,[b].[Invoice]\n"
@@ -252,7 +273,7 @@ public class BillDAO extends DBContext {
                 String PaymentDate = rs.getString("PaymentDate");
                 int totalPrice = rs.getInt("TotalPrice");
                 Bill bill = new Bill(IDBill, Invoice, rFFD.getRegisteredFootballFielByID(IDRegisteredFootballField),
-                        rFOD.getRegistFindOpponentByID(IDRegistFindOppoent), userD.getUserByIDAccount(IDAccount2), null, PaymentDate, totalPrice);
+                        rFOD.getRegistFindOpponentByID(IDRegistFindOppoent), userD.getUserByIDAccount(IDAccount2), sTD.getScheduleTournamentByID(IDScheduleTournament), PaymentDate, totalPrice);
                 list.add(bill);
             }
         } catch (SQLException ex) {
@@ -264,6 +285,7 @@ public class BillDAO extends DBContext {
     public Bill getBillByID(int id) {
         RegisteredFootballFieldDAO rFFD = new RegisteredFootballFieldDAO();
         RegistFindOpponentDAO rFOD = new RegistFindOpponentDAO();
+        ScheduleTournamentDAO sTD = new ScheduleTournamentDAO();
         UserDAO userD = new UserDAO();
         String sql = "SELECT [IDBill]\n"
                 + "      ,[Invoice]\n"
@@ -288,7 +310,7 @@ public class BillDAO extends DBContext {
                 String PaymentDate = rs.getString("PaymentDate");
                 int totalPrice = rs.getInt("TotalPrice");
                 Bill bill = new Bill(IDBill, Invoice, rFFD.getRegisteredFootballFielByID(IDRegisteredFootballField),
-                        rFOD.getRegistFindOpponentByID(IDRegistFindOppoent), userD.getUserByIDAccount(IDAccount2), null, PaymentDate, totalPrice);
+                        rFOD.getRegistFindOpponentByID(IDRegistFindOppoent), userD.getUserByIDAccount(IDAccount2), sTD.getScheduleTournamentByID(IDScheduleTournament), PaymentDate, totalPrice);
                 return bill;
             }
         } catch (SQLException ex) {
@@ -300,6 +322,7 @@ public class BillDAO extends DBContext {
     public Bill getBillByInvoice(String invoice) {
         RegisteredFootballFieldDAO rFFD = new RegisteredFootballFieldDAO();
         RegistFindOpponentDAO rFOD = new RegistFindOpponentDAO();
+        ScheduleTournamentDAO sTD = new ScheduleTournamentDAO();
         UserDAO userD = new UserDAO();
         String sql = "SELECT [IDBill]\n"
                 + "      ,[Invoice]\n"
@@ -324,7 +347,7 @@ public class BillDAO extends DBContext {
                 String PaymentDate = rs.getString("PaymentDate");
                 int totalPrice = rs.getInt("TotalPrice");
                 Bill bill = new Bill(IDBill, Invoice, rFFD.getRegisteredFootballFielByID(IDRegisteredFootballField),
-                        rFOD.getRegistFindOpponentByID(IDRegistFindOppoent), userD.getUserByIDAccount(IDAccount2), null, PaymentDate, totalPrice);
+                        rFOD.getRegistFindOpponentByID(IDRegistFindOppoent), userD.getUserByIDAccount(IDAccount2),sTD.getScheduleTournamentByID(IDScheduleTournament) , PaymentDate, totalPrice);
                 return bill;
             }
         } catch (SQLException ex) {

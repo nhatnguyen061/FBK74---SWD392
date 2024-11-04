@@ -220,31 +220,31 @@
                                     </c:if>
                                 </div>
 
-                                <div id="waterContainer" class="mb-3">
-                                    <div class="row mb-1">
-                                        <div class="col">
-                                            <label class="form-label" for="typewater">Loại nước</label>
-                                            <select class="form-control" name="typewater" id="typewater">
-                                                <c:forEach items="${listProduct}" var="l">
-                                                    <option value="${l.name}">${l.name}</option>
-                                                </c:forEach>
-                                            </select>
-                                        </div>
-                                        <div class="col">
-                                            <label class="form-label" for="quantity">Số lượng</label>
-                                            <input type="number" class="form-control" name="quantity" value="0">
-                                        </div>
-                                        <div class="col">
-                                            <label class="form-label" for="pricewater">Giá tiền</label>
-                                            <input type="text" class="form-control" name="pricewater" value="0">
-                                        </div>
-                                    </div>
-                                </div>
+                                <!--                                <div id="waterContainer" class="mb-3">
+                                                                    <div class="row mb-1">
+                                                                        <div class="col">
+                                                                            <label class="form-label" for="typewater">Loại nước</label>
+                                                                            <select class="form-control" name="typewater" id="typewater">
+                                <c:forEach items="${listProduct}" var="l">
+                                    <option value="${l.name}">${l.name}</option>
+                                </c:forEach>
+                            </select>
+                        </div>
+                        <div class="col">
+                            <label class="form-label" for="quantity">Số lượng</label>
+                            <input type="number" class="form-control" name="quantity" value="0">
+                        </div>
+                        <div class="col">
+                            <label class="form-label" for="pricewater">Giá tiền</label>
+                            <input type="text" class="form-control" name="pricewater" value="0">
+                        </div>
+                    </div>
+                </div>-->
 
                                 <div class="text-center">
                                     <div class="mb-3" id="totalPrice" >
                                         0 VNĐ</div>  
-                                    <button type="button" class="btn btn-primary" onclick="themHang()">Thêm hàng (+)</button>
+                                    <!--                                    <button type="button" class="btn btn-primary" onclick="themHang()">Thêm hàng (+)</button>-->
                                     <button type="button" class="btn btn-primary" onclick="submitForm()">Thanh toán</button>
                                 </div>
                             </form>
@@ -256,28 +256,28 @@
                                 updateTotalPrice();
 
 // Thêm sự kiện onchange cho các trường loại nước, số lượng, và giá tiền
-                                var selectLoaiNuoc = document.querySelector('[name="typewater"]');
-                                var inputSoLuong = document.querySelector('[name="quantity"]');
-                                var inputGiaTien = document.querySelector('[name="pricewater"]');
-
-                                selectLoaiNuoc.addEventListener('change', updateTotalPrice);
-                                inputSoLuong.addEventListener('change', updateTotalPrice);
-                                inputGiaTien.addEventListener('change', updateTotalPrice);
+//                                var selectLoaiNuoc = document.querySelector('[name="typewater"]');
+//                                var inputSoLuong = document.querySelector('[name="quantity"]');
+//                                var inputGiaTien = document.querySelector('[name="pricewater"]');
+//
+//                                selectLoaiNuoc.addEventListener('change', updateTotalPrice);
+//                                inputSoLuong.addEventListener('change', updateTotalPrice);
+//                                inputGiaTien.addEventListener('change', updateTotalPrice);
 
                                 function updateTotalPrice() {
-                                    var waterContainers = document.querySelectorAll('#waterContainer .row');
+//                                    var waterContainers = document.querySelectorAll('#waterContainer .row');
                                     var totalPrice = 0;
 
                                     // Fetch and parse #price and #deposit values
                                     var priceValue = parseInt(document.getElementById('price').value || '0', 10); // Default to 0 if not found
                                     var depositValue = parseInt(document.getElementById('deposit') ? document.getElementById('deposit').value : '0', 10); // Default to 0 if not found
 
-                                    waterContainers.forEach(function (container) {
-                                        var soLuong = container.querySelector('[name="quantity"]').value;
-                                        var giaTien = container.querySelector('[name="pricewater"]').value;
-                                        var subtotal = parseInt(soLuong) * parseInt(giaTien);
-                                        totalPrice += subtotal;
-                                    });
+//                                    waterContainers.forEach(function (container) {
+//                                        var soLuong = container.querySelector('[name="quantity"]').value;
+//                                        var giaTien = container.querySelector('[name="pricewater"]').value;
+//                                        var subtotal = parseInt(soLuong) * parseInt(giaTien);
+//                                        totalPrice += subtotal;
+//                                    });
 
                                     // Add #price and #deposit to total price
                                     totalPrice += priceValue - depositValue;
@@ -287,107 +287,107 @@
                                     totalPriceElement.textContent = 'Tổng hóa đơn: ' + totalPrice + ' VNĐ';
                                 }
 
-                                function themHang() {
-                                    // Lấy element waterContainer
-                                    var waterContainer = document.getElementById('waterContainer');
-                                    // Tạo div mới để chứa các trường
-                                    var newRow = document.createElement('div');
-                                    newRow.className = 'row mb-1';
-
-                                    // Tạo div cho Loại nước
-                                    var colLoaiNuoc = document.createElement('div');
-                                    colLoaiNuoc.className = 'col';
-                                    var labelLoaiNuoc = document.createElement('label');
-                                    labelLoaiNuoc.className = 'form-label';
-                                    labelLoaiNuoc.setAttribute('for', 'typewater');
-                                    labelLoaiNuoc.textContent = 'Loại nước';
-
-                                    // Tạo select mới
-                                    var selectLoaiNuoc = document.createElement('select');
-                                    selectLoaiNuoc.className = 'form-control';
-                                    selectLoaiNuoc.setAttribute('name', 'typewater');
-
-                                    // Sao chép options từ select gốc sang select mới
-                                    var originalSelect = document.getElementById('typewater');
-                                    Array.from(originalSelect.options).forEach(function (option) {
-                                        var newOption = option.cloneNode(true);
-                                        selectLoaiNuoc.appendChild(newOption);
-                                    });
-
-                                    // Thêm label và select vào colLoaiNuoc
-                                    colLoaiNuoc.appendChild(labelLoaiNuoc);
-                                    colLoaiNuoc.appendChild(selectLoaiNuoc);
-
-                                    // Tạo div cho Số lượng
-                                    var colSoLuong = document.createElement('div');
-                                    colSoLuong.className = 'col';
-                                    var labelSoLuong = document.createElement('label');
-                                    labelSoLuong.className = 'form-label';
-                                    labelSoLuong.setAttribute('for', 'quantity');
-                                    labelSoLuong.textContent = 'Số lượng';
-                                    var inputSoLuong = document.createElement('input');
-                                    inputSoLuong.type = 'number';
-                                    inputSoLuong.className = 'form-control';
-                                    inputSoLuong.setAttribute('name', 'quantity');
-
-                                    // Thêm label và input vào colSoLuong
-                                    colSoLuong.appendChild(labelSoLuong);
-                                    colSoLuong.appendChild(inputSoLuong);
-
-                                    // Tạo div cho Giá tiền
-                                    var colGiaTien = document.createElement('div');
-                                    colGiaTien.className = 'col';
-                                    var labelGiaTien = document.createElement('label');
-                                    labelGiaTien.className = 'form-label';
-                                    labelGiaTien.setAttribute('for', 'pricewater');
-                                    labelGiaTien.textContent = 'Giá tiền';
-                                    var inputGiaTien = document.createElement('input');
-                                    inputGiaTien.type = 'text';
-                                    inputGiaTien.className = 'form-control';
-                                    inputGiaTien.setAttribute('name', 'pricewater');
-
-                                    // Thêm label và input vào colGiaTien
-                                    colGiaTien.appendChild(labelGiaTien);
-                                    colGiaTien.appendChild(inputGiaTien);
-
-                                    // Thêm sự kiện onchange cho các trường loại nước, số lượng, và giá tiền
-                                    selectLoaiNuoc.addEventListener('change', updateTotalPrice);
-                                    inputSoLuong.addEventListener('change', updateTotalPrice);
-                                    inputGiaTien.addEventListener('change', updateTotalPrice);
-
-                                    // Thêm các div vào hàng mới
-                                    newRow.appendChild(colLoaiNuoc);
-                                    newRow.appendChild(colSoLuong);
-                                    newRow.appendChild(colGiaTien);
-
-                                    // Thêm hàng mới vào waterContainer
-                                    waterContainer.appendChild(newRow);
-
-                                    // Cập nhật tổng hóa đơn khi thêm hàng mới
-                                    updateTotalPrice();
-                                }
+//                                function themHang() {
+//                                    // Lấy element waterContainer
+//                                    var waterContainer = document.getElementById('waterContainer');
+//                                    // Tạo div mới để chứa các trường
+//                                    var newRow = document.createElement('div');
+//                                    newRow.className = 'row mb-1';
+//
+//                                    // Tạo div cho Loại nước
+//                                    var colLoaiNuoc = document.createElement('div');
+//                                    colLoaiNuoc.className = 'col';
+//                                    var labelLoaiNuoc = document.createElement('label');
+//                                    labelLoaiNuoc.className = 'form-label';
+//                                    labelLoaiNuoc.setAttribute('for', 'typewater');
+//                                    labelLoaiNuoc.textContent = 'Loại nước';
+//
+//                                    // Tạo select mới
+//                                    var selectLoaiNuoc = document.createElement('select');
+//                                    selectLoaiNuoc.className = 'form-control';
+//                                    selectLoaiNuoc.setAttribute('name', 'typewater');
+//
+//                                    // Sao chép options từ select gốc sang select mới
+//                                    var originalSelect = document.getElementById('typewater');
+//                                    Array.from(originalSelect.options).forEach(function (option) {
+//                                        var newOption = option.cloneNode(true);
+//                                        selectLoaiNuoc.appendChild(newOption);
+//                                    });
+//
+//                                    // Thêm label và select vào colLoaiNuoc
+//                                    colLoaiNuoc.appendChild(labelLoaiNuoc);
+//                                    colLoaiNuoc.appendChild(selectLoaiNuoc);
+//
+//                                    // Tạo div cho Số lượng
+//                                    var colSoLuong = document.createElement('div');
+//                                    colSoLuong.className = 'col';
+//                                    var labelSoLuong = document.createElement('label');
+//                                    labelSoLuong.className = 'form-label';
+//                                    labelSoLuong.setAttribute('for', 'quantity');
+//                                    labelSoLuong.textContent = 'Số lượng';
+//                                    var inputSoLuong = document.createElement('input');
+//                                    inputSoLuong.type = 'number';
+//                                    inputSoLuong.className = 'form-control';
+//                                    inputSoLuong.setAttribute('name', 'quantity');
+//
+//                                    // Thêm label và input vào colSoLuong
+//                                    colSoLuong.appendChild(labelSoLuong);
+//                                    colSoLuong.appendChild(inputSoLuong);
+//
+//                                    // Tạo div cho Giá tiền
+//                                    var colGiaTien = document.createElement('div');
+//                                    colGiaTien.className = 'col';
+//                                    var labelGiaTien = document.createElement('label');
+//                                    labelGiaTien.className = 'form-label';
+//                                    labelGiaTien.setAttribute('for', 'pricewater');
+//                                    labelGiaTien.textContent = 'Giá tiền';
+//                                    var inputGiaTien = document.createElement('input');
+//                                    inputGiaTien.type = 'text';
+//                                    inputGiaTien.className = 'form-control';
+//                                    inputGiaTien.setAttribute('name', 'pricewater');
+//
+//                                    // Thêm label và input vào colGiaTien
+//                                    colGiaTien.appendChild(labelGiaTien);
+//                                    colGiaTien.appendChild(inputGiaTien);
+//
+//                                    // Thêm sự kiện onchange cho các trường loại nước, số lượng, và giá tiền
+//                                    selectLoaiNuoc.addEventListener('change', updateTotalPrice);
+//                                    inputSoLuong.addEventListener('change', updateTotalPrice);
+//                                    inputGiaTien.addEventListener('change', updateTotalPrice);
+//
+//                                    // Thêm các div vào hàng mới
+//                                    newRow.appendChild(colLoaiNuoc);
+//                                    newRow.appendChild(colSoLuong);
+//                                    newRow.appendChild(colGiaTien);
+//
+//                                    // Thêm hàng mới vào waterContainer
+//                                    waterContainer.appendChild(newRow);
+//
+//                                    // Cập nhật tổng hóa đơn khi thêm hàng mới
+//                                    updateTotalPrice();
+//                                }
 
                                 function submitForm() {
-                                    var waterContainers = document.querySelectorAll('#waterContainer .row');
-                                    var selectedWaterInfo = [];
+//                                    var waterContainers = document.querySelectorAll('#waterContainer .row');
+//                                    var selectedWaterInfo = [];
                                     var totalPrice = 0;
 
                                     // Fetch and parse #price and #deposit values
                                     var priceValue = parseInt(document.getElementById('price').value || '0', 10); // Default to 0 if not found
                                     var depositValue = parseInt(document.getElementById('deposit') ? document.getElementById('deposit').value : '0', 10); // Default to 0 if not found
 
-                                    waterContainers.forEach(function (container) {
-                                        var loaiNuoc = container.querySelector('[name="typewater"]').value;
-                                        var soLuong = container.querySelector('[name="quantity"]').value;
-                                        var giaTien = container.querySelector('[name="pricewater"]').value;
-                                        var subtotal = parseInt(soLuong) * parseInt(giaTien);
-                                        totalPrice += subtotal;
-                                        selectedWaterInfo.push({
-                                            loaiNuoc: loaiNuoc,
-                                            soLuong: soLuong,
-                                            giaTien: giaTien
-                                        });
-                                    });
+//                                    waterContainers.forEach(function (container) {
+//                                        var loaiNuoc = container.querySelector('[name="typewater"]').value;
+//                                        var soLuong = container.querySelector('[name="quantity"]').value;
+//                                        var giaTien = container.querySelector('[name="pricewater"]').value;
+//                                        var subtotal = parseInt(soLuong) * parseInt(giaTien);
+//                                        totalPrice += subtotal;
+//                                        selectedWaterInfo.push({
+//                                            loaiNuoc: loaiNuoc,
+//                                            soLuong: soLuong,
+//                                            giaTien: giaTien
+//                                        });
+//                                    });
 
                                     // Add #price and #deposit to total price
                                     totalPrice += priceValue + depositValue;
@@ -396,13 +396,13 @@
 //                                    totalPriceElement.textContent = 'Tổng hóa đơn: ' + totalPrice + ' VNĐ';
 
                                     // Tạo một hidden input để chứa thông tin về các loại nước đã thêm
-                                    var hiddenInput = document.createElement('input');
-                                    hiddenInput.type = 'hidden';
-                                    hiddenInput.name = 'selectedWaterInfo';
-                                    hiddenInput.value = JSON.stringify(selectedWaterInfo);
+//                                    var hiddenInput = document.createElement('input');
+//                                    hiddenInput.type = 'hidden';
+//                                    hiddenInput.name = 'selectedWaterInfo';
+//                                    hiddenInput.value = JSON.stringify(selectedWaterInfo);
 
                                     // Thêm hidden input vào form
-                                    document.querySelector('#myForm').appendChild(hiddenInput);
+//                                    document.querySelector('#myForm').appendChild(hiddenInput);
 
                                     // Thêm giá trị tổng hóa đơn vào form
                                     var hiddenTotalPrice = document.createElement('input');

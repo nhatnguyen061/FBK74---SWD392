@@ -131,7 +131,7 @@ public class XulyyeucauServlet extends HttpServlet {
         rFFD.changeStatusWithIDRegisteredFootballField(status, idrFF);
         if(rFF.getRegistFindOppoent()!=null){
             try {
-                rfoDAO.approveMember(rFF.getRegistFindOppoent().getIdRFO());
+                rfoDAO.approveDaCoDoithu(rFF.getRegistFindOppoent().getIdRFO());
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(XulyyeucauServlet.class.getName()).log(Level.SEVERE, null, ex);
             }

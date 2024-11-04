@@ -172,8 +172,17 @@ public class Danhsachtimsan_nhatServlet extends HttpServlet {
                 }
             }
         }
-        if (list.size() > 0) {
-            int i = 10 / list.get(0).size();
+
+        if (!list.isEmpty()) {
+
+            int maxSize = 0;
+
+            for (List<FootballFieldSchedule> subList : list) {
+                if (subList.size() > maxSize) {
+                    maxSize = subList.size();
+                }
+            }
+            int i = 10 / maxSize;
             session.setAttribute("size", i);
         }
 
@@ -201,7 +210,7 @@ public class Danhsachtimsan_nhatServlet extends HttpServlet {
             listIDFFS.add(scheduleTournament.getFootballFieldSchedule().getIDFootballFieldSchedule());
         }
         //lấy id RFO
-        if(request.getParameter("idRFO")!=null){
+        if (request.getParameter("idRFO") != null) {
             String idRFO_raw = request.getParameter("idRFO");
             session.setAttribute("idRFO", Integer.parseInt(idRFO_raw));
         }
@@ -211,7 +220,7 @@ public class Danhsachtimsan_nhatServlet extends HttpServlet {
         session.setAttribute("listIDFFS", listIDFFS);
         session.setAttribute("listffs", list);
         request.getRequestDispatcher("pagination").forward(request, response);
-          
+
     }
 
     @Override

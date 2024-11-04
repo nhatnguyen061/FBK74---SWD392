@@ -70,20 +70,10 @@
                             <div class="dropdown-menu bg-transparent border-0">
                                 <a href="frontend.nam/AdminTournaments" class="dropdown-item">Quản lý giải đấu</a>
                             </div>
-                        </div>
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Khóa học</a>
-                            <div class="dropdown-menu bg-transparent border-0">
-                                <a href="ManagerCourse" class="dropdown-item">Quản lý lớp học</a>
-                            </div>
-                        </div>
+                        </div>                        
                         <div class="nav-item">
                             <a href="manageuser?action=viewList" class="nav-link " ><i class="fa fa-laptop me-2"></i>Quản lý người dùng</a>
-
-                        </div>
-                        <div class="nav-item">
-                            <a href="product" class="nav-link" ><i class="fa fa-laptop me-2"></i>Quản lý dịch vụ</a>                            
-                        </div>
+                        </div>                      
                         <div class="nav-item">
                             <a href="doanhthu" class="nav-link" ><i class="fa fa-laptop me-2"></i>Doanh thu</a>                            
                         </div>

@@ -92,11 +92,11 @@ public class ThanhtoanBillServlet extends HttpServlet {
         if (typeDonthanhtoan.equals("rFF")) {
             RegisteredFootballField donThanhToan = rffDAO.getRegisteredFootballFielByID(idDonthanhtoan);
             request.setAttribute("donThanhToan", donThanhToan);
-            request.setAttribute("typeDonthanhtoan", typeDonthanhtoan);
+//            request.setAttribute("typeDonthanhtoan", typeDonthanhtoan);
         } else if (typeDonthanhtoan.equals("sT")) {
             ScheduleTournament donThanhToan = sTDAO.getScheduleStounamentFullInfoById(idDonthanhtoan);
             request.setAttribute("donThanhToan", donThanhToan);
-            request.setAttribute("typeDonthanhtoan", typeDonthanhtoan);
+//            request.setAttribute("typeDonthanhtoan", typeDonthanhtoan);
         }
 //        else {
 //            StudySchedule donThanhToan = sSDAO.getStudyScheduleByID(idDonthanhtoan);

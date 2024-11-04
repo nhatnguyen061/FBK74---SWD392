@@ -80,19 +80,19 @@ public class LichsuhoadonServlet_nhat extends HttpServlet {
                 if (bill.getInvoice().contains("A")) {
 //                || (bill.getRegistFindOpponent().getIdAccount1().getIDAccount() == user.getIDAccount())
                     //kiểm tra nếu hóa đơn là thanh toán thì nếu người đk hoặc đối thủ đều lưu vào là user lưu vào
-                    if ((bill.getRegisteredFootballField().getAccount1().getIDAccount() == user.getIDAccount())
-                            || (bill.getRegisteredFootballField().getRegistFindOppoent()!=null && bill.getRegisteredFootballField().getRegistFindOppoent().getIdAccount1().getIDAccount() == user.getIDAccount())) {
+                    if ((bill.getRegisteredFootballField()!=null && bill.getRegisteredFootballField().getAccount1().getIDAccount() == user.getIDAccount())
+                            || (bill.getRegisteredFootballField()!=null&& bill.getRegisteredFootballField().getRegistFindOppoent() != null && bill.getRegisteredFootballField().getRegistFindOppoent().getIdAccount1().getIDAccount() == user.getIDAccount())) {
                         listBill.add(bill);
                     }
                 } else {
                     //kiểm tra nếu là đơn cọc thì nếu đk sân thì lấy hoặc nếu đk đối thì lấy && bill.getRegistFindOpponent()==null
 //                || (bill.getRegisteredFootballField()==null && bill.getRegistFindOpponent().getIdAccount1().getIDAccount()==user.getIDAccount())
-                    if ((bill.getRegisteredFootballField().getAccount1().getIDAccount() == user.getIDAccount())
-                            ) {
+                    if ((bill.getRegisteredFootballField()!=null && bill.getRegisteredFootballField().getAccount1().getIDAccount() == user.getIDAccount())
+                            ||(bill.getRegistFindOpponent()!=null && bill.getRegistFindOpponent().getIdAccount1().getIDAccount() == user.getIDAccount())) {
                         listBill.add(bill);
                     }
                 }
-            }           
+            }
             Collections.reverse(listBill);
             request.setAttribute("listBill", listBill);
             request.getRequestDispatcher("lichsuhoadon_nhat.jsp").forward(request, response);

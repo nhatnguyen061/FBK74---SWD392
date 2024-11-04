@@ -68,12 +68,11 @@ public class AdminResult extends HttpServlet {
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
-        ScheduleTournamentDAO sTDAO = new ScheduleTournamentDAO();
-        String IDTournament_raw = request.getParameter("IDTournament");
-        int IDTournament = Integer.parseInt(IDTournament_raw);
-        List<ScheduleTournament> listST = sTDAO.getScheduleTournamentByIDTournament(IDTournament);
+        String IDTournament = request.getParameter("IDTournament");
+        ScheduleDAO scheduleDAO = new ScheduleDAO();
+        List<Schedule> scheduleResults = scheduleDAO.getAll(Integer.parseInt(IDTournament));
+        request.setAttribute("scheduleResults", scheduleResults);
         request.setAttribute("IDTournament", IDTournament);
-        request.setAttribute("listST", listST);
         request.getRequestDispatcher("ketqua_nam.jsp").forward(request, response);
     }
 

@@ -22,11 +22,13 @@ public class ScheduleTournamentDAO extends DBContext {
 
     public ScheduleTournament getScheduleTournamentByID(int id) {
         FootballFieldScheduleDAO ffsDAO = new FootballFieldScheduleDAO();
+        TournamentDAO tourDAO = new TournamentDAO();
         String sql = " SELECT TOP (1000) [IDScheduleTournament]\n"
                 + "      ,[IDFootballFieldSchedule]\n"
                 + "      ,[Date]\n"
+                +"       ,[IDTournament]\n"
                 + "      ,[Status]\n"
-                + "  FROM [FBK74].[dbo].[ScheduleTournament] where IDScheduleTournament = ?";
+                + "  FROM [dbo].[ScheduleTournament] where IDScheduleTournament = ?";
         try {
             PreparedStatement st = getConnection().prepareStatement(sql);
             st.setInt(1, id);
@@ -36,6 +38,7 @@ public class ScheduleTournamentDAO extends DBContext {
                 sT.setIDScheduleTournament(id);
                 sT.setFootballFieldSchedule(ffsDAO.getFootballFieldScheduleByID(rs.getInt("IDFootballFieldSchedule")));
                 sT.setDate(rs.getDate("Date"));
+                sT.setTournament(tourDAO.findByID(rs.getInt("IDTournament")));
                 sT.setStatus(rs.getInt("Status"));
                 return sT;
             }
@@ -162,7 +165,7 @@ public class ScheduleTournamentDAO extends DBContext {
                 + "      ,[IDTournament]\n"
                 + "      ,[Description]\n"
                 + "      ,[Status]\n"
-                + "  FROM [FBK74].[dbo].[ScheduleTournament] where [Date] = ? and Status = 0";
+                + "  FROM [dbo].[ScheduleTournament] where [Date] = ? and Status = 0";
         try {
             PreparedStatement st = getConnection().prepareStatement(sql);
             st.setString(1, date);
@@ -211,6 +214,7 @@ public class ScheduleTournamentDAO extends DBContext {
                 sT.setDate(rs.getDate("Date"));
                 sT.setTeamA(teamDAO.getTeamById(rs.getInt("IDTeam1")));
                 sT.setTeamB(teamDAO.getTeamById(rs.getInt("IDTeam2")));
+                sT.setResult(rs.getString("Result"));
                 sT.setTournament(tournamentDAO.findByID(idTournament));
                 sT.setDescription(rs.getString("Description"));
                 sT.setStatus(rs.getInt("Status"));

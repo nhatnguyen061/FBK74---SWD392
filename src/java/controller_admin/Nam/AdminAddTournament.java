@@ -63,7 +63,7 @@ public class AdminAddTournament extends HttpServlet {
 //        String image = request.getParameter("image");
         Part file = request.getPart("image1");
         String imageFileName = file.getSubmittedFileName();
-        String uploadPath = "D:/Java/FBK74/web/img_nam" + imageFileName;
+        String uploadPath = "D:/1_SWD392/SWD192/FBK74/web/img_nam/" + imageFileName;
         try {
             FileOutputStream fos = new FileOutputStream(uploadPath);
             InputStream is = file.getInputStream();

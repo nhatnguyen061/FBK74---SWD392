@@ -40,7 +40,7 @@ public class ChitietbillAdmin extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ChitietbillAdmin</title>");            
+            out.println("<title>Servlet ChitietbillAdmin</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet ChitietbillAdmin at " + request.getContextPath() + "</h1>");
@@ -71,16 +71,16 @@ public class ChitietbillAdmin extends HttpServlet {
 //        ProductDetailDAO productDetailDAO = new ProductDetailDAO();
         BillDAO billDAO = new BillDAO();
         Bill bill = billDAO.getBillByID(idBill);
-        int deposit=0;
-        if(bill.getRegisteredFootballField()!=null){
+        int deposit = 0;
+        if (bill.getRegisteredFootballField() != null) {
             request.setAttribute("tenSan", bill.getRegisteredFootballField().getFootballFieldSchedule().getFootballField().getName());
             request.setAttribute("loaiSan", bill.getRegisteredFootballField().getFootballFieldSchedule().getFootballField().getTypeofFootballField());
             request.setAttribute("startTime", bill.getRegisteredFootballField().getFootballFieldSchedule().getStartTime());
             request.setAttribute("endTime", bill.getRegisteredFootballField().getFootballFieldSchedule().getEndTime());
             request.setAttribute("priceFF", bill.getRegisteredFootballField().getFootballFieldSchedule().getFootballField().getPrice());
-            if(bill.getRegisteredFootballField().getRegistFindOppoent()!=null){
-                deposit = bill.getRegisteredFootballField().getDeposit()*2;
-                request.setAttribute("deposit", bill.getRegisteredFootballField().getDeposit()*2);
+            if (bill.getRegisteredFootballField().getRegistFindOppoent() != null) {
+                deposit = bill.getRegisteredFootballField().getDeposit() * 2;
+                request.setAttribute("deposit", bill.getRegisteredFootballField().getDeposit() * 2);
                 request.setAttribute("bookerNameRegist", bill.getRegisteredFootballField().getRegistFindOppoent().getName());
                 request.setAttribute("phoneRegist", bill.getRegisteredFootballField().getRegistFindOppoent().getPhone());
             } else {
@@ -89,29 +89,28 @@ public class ChitietbillAdmin extends HttpServlet {
             }
             request.setAttribute("bookerName", bill.getRegisteredFootballField().getName());
             request.setAttribute("phone", bill.getRegisteredFootballField().getPhoneNumber());
-            
+
         }
-//        else if(bill.getStudySchedule()!=null){
-//            request.setAttribute("tenSan", bill.getStudySchedule().getFootballFieldSchedule().getFootballField().getName());
-//            request.setAttribute("loaiSan", bill.getStudySchedule().getFootballFieldSchedule().getFootballField().getTypeofFootballField());
-//            request.setAttribute("startTime", bill.getStudySchedule().getFootballFieldSchedule().getStartTime());
-//            request.setAttribute("endTime", bill.getStudySchedule().getFootballFieldSchedule().getEndTime());
-//            request.setAttribute("priceFF", bill.getStudySchedule().getFootballFieldSchedule().getFootballField().getPrice());
-//            request.setAttribute("bookerName", "Tên khóa học");
-//        }
-            else if(bill.getScheduleTournament()!=null){
+        if (bill.getScheduleTournament() != null) {
             request.setAttribute("tenSan", bill.getScheduleTournament().getFootballFieldSchedule().getFootballField().getName());
             request.setAttribute("loaiSan", bill.getScheduleTournament().getFootballFieldSchedule().getFootballField().getTypeofFootballField());
             request.setAttribute("startTime", bill.getScheduleTournament().getFootballFieldSchedule().getStartTime());
             request.setAttribute("endTime", bill.getScheduleTournament().getFootballFieldSchedule().getEndTime());
             request.setAttribute("priceFF", bill.getScheduleTournament().getFootballFieldSchedule().getFootballField().getPrice());
-            request.setAttribute("bookerName", "Tên giải đấu");
+            request.setAttribute("bookerName", bill.getScheduleTournament().getTournament().getName());
         }
-        
-//        List<ProductDetail> listProductDetail = productDetailDAO.getProductDetailByIDBill(idBill);
-//        request.setAttribute("listProductDT", listProductDetail);
-        request.setAttribute("bill", bill);    
-        request.setAttribute("totalBill", deposit+bill.getTotalPrice());
+        if(bill.getRegistFindOpponent()!=null)
+        {
+            request.setAttribute("loaiSan", bill.getRegistFindOpponent().getTypeFootballField());
+            request.setAttribute("startTime", bill.getRegistFindOpponent().getTimeStart());
+            request.setAttribute("endTime", bill.getRegistFindOpponent().getTimeEnd());
+            request.setAttribute("bookerName", bill.getRegistFindOpponent().getName());
+            request.setAttribute("phone", bill.getRegistFindOpponent().getPhone());
+            request.setAttribute("deposit", bill.getRegistFindOpponent().getDeposit());
+            deposit = (int)bill.getRegistFindOpponent().getDeposit();
+        }
+        request.setAttribute("bill", bill);
+        request.setAttribute("totalBill", deposit + bill.getTotalPrice());
         request.getRequestDispatcher("chitiethoadon_nhat.jsp").forward(request, response);
     }
 

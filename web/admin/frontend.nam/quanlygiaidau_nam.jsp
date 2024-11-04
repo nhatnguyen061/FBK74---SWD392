@@ -74,19 +74,9 @@
                                 <a href="AdminTournaments" class="dropdown-item">Quản lý giải đấu</a>
                             </div>
                         </div>
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Khóa học</a>
-                            <div class="dropdown-menu bg-transparent border-0">
-                                <a href="ManagerCourse" class="dropdown-item">Quản lý lớp học</a>
-
-                            </div>
-                        </div>
                         <div class="nav-item">
                             <a href="manageuser?action=viewList" class="nav-link " ><i class="fa fa-laptop me-2"></i>Quản lý người dùng</a>
 
-                        </div>
-                        <div class="nav-item">
-                            <a href="product" class="nav-link" ><i class="fa fa-laptop me-2"></i>Quản lý dịch vụ</a>                            
                         </div>
                         <div class="nav-item">
                             <a href="doanhthu" class="nav-link" ><i class="fa fa-laptop me-2"></i>Doanh thu</a>                            
@@ -101,22 +91,19 @@
             <div class="content">
                 <!-- Navbar Start -->
                 <nav class="navbar navbar-expand bg-light navbar-light sticky-top px-4 py-0">
-                    <a href="index.html" class="navbar-brand d-flex d-lg-none me-4">
-                        <h2 class="text-primary mb-0"><i class="fa fa-hashtag"></i></h2>
-                    </a>
                     <a href="#" class="sidebar-toggler flex-shrink-0">
                         <i class="fa fa-bars"></i>
-                    </a>
+                    </a>    
                     <div class="navbar-nav align-items-center ms-auto">                                            
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                                <img class="rounded-circle me-lg-2" src="../img/user.jpg" alt="" style="width: 40px; height: 40px;">
-                                <span class="d-none d-lg-inline-flex">John Doe</span>
+                                <img class="rounded-circle me-lg-2" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
+                                <span class="d-none d-lg-inline-flex">${sessionScope.account.name}</span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                                <a href="#" class="dropdown-item">My Profile</a>
+                                <a href="profile2" class="dropdown-item">My Profile</a>
                                 <a href="#" class="dropdown-item">Settings</a>
-                                <a href="../../logout" class="dropdown-item">Log Out</a>
+                                <a href="../logout" class="dropdown-item">Log Out</a>
                             </div>
                         </div>
                     </div>
@@ -140,7 +127,7 @@
                                             <div>
                                                 <a href="AdminCensor?IDTournament=${tournament.id}" class="btn btn-dark btn-sm me-2">Kiểm duyệt</a>
                                                 <a href="AdminTeamServlet?IDTournament=${tournament.id}" class="btn btn-info btn-sm me-2">Đội bóng</a>
-                                                <button class="btn btn-warning btn-sm me-2" type="button" onclick="window.location.href = 'lichthidau_nam.jsp';">Thành tích</button>
+                                                
                                                 <a href="AdminResult?IDTournament=${tournament.id}" class="btn btn-success btn-sm me-2">Lịch-kết quả</a>
                                                 <a href="AdminEditTournament?IDTournament=${tournament.id}" class="btn btn-secondary btn-sm me-2">Chỉnh sửa</a>
                                                 <a href="AdminDeleteTournament?IDTournament=${tournament.id}" class="btn btn-danger btn-sm">Xóa</a>

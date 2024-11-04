@@ -21,12 +21,12 @@
          <div class="container">
            <div class="header clearfix">
 
-                <h3 class="text-muted">Thanh toán tiền cọc sân</h3>
+                <h3 class="text-muted">Thanh toán tiền cọc Tìm doi thu</h3>
             </div>
             <h3>Tạo mới đơn hàng</h3>
             <div class="table-responsive">
                 <form action="vnpayajax" id="frmCreateOrder" method="post">   
-<!--                    <input name="rffID" value="${sessionScope.idRFO}" hidden="" readonly="">-->
+                    <input name="rfoID" value="${sessionScope.idRFO}" hidden="" readonly="">
                     <div class="form-group">
                         <label for="amount">Số tiền</label>
                         <input class="form-control" data-val="true" data-val-number="The field Amount must be a number." data-val-required="The Amount field is required." id="amount" max="100000000" min="1" name="amount" type="number" value="100000" readonly="" />
